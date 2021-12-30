@@ -1,12 +1,16 @@
-import React from "react"; 
-import { Row, Col } from 'react-bootstrap'; 
+import React from "react";
+import { Row,  Navbar, Container } from 'react-bootstrap';
+import { ShoppingCart } from "./ShoppingCart/ShoppingCart";
 
-export const Headerapp = () => 
-    (
-        <Row>
-          <Col xs={12}>
-            <div>Mini Ecommerce</div>
-          </Col>
-        </Row>
-    );
+export const Headerapp = () =>
+(
+  <Row>
+    <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="#home">Mini e-commerce</Navbar.Brand>
+        <ShoppingCart />
+      </Container>
+    </Navbar>
+  </Row>
+);
 
