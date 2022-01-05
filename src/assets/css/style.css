@@ -7,3 +7,12 @@
     font-weight: bold;
     color: blue;
 }
+
+.link_prod {
+    text-decoration: none;
+    color: #003300;
+}
+
+.link_prod:hover {
+   color: darkslateblue;
+}

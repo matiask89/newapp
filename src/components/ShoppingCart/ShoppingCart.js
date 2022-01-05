@@ -1,9 +1,11 @@
 import { useLiveQuery } from "dexie-react-hooks";
-import React from "react";
+import React, { useEffect } from "react";
 import { NavDropdown, Nav, Navbar } from 'react-bootstrap';
 import { ShoppingCartItem } from "./ShoppingCartItem";
 import db from '../../app/db/db'
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import '../../assets/css/style.css';
 
 export const ShoppingCart = () => {
   const [productsCart, setProductsCart] = useState([])
@@ -11,6 +13,7 @@ export const ShoppingCart = () => {
 
   const getTotalPrice = () => {
     const total = productsCart?.reduce((totalPrice, currentProduct) => {
+
       return totalPrice + currentProduct.price
     }, 0)
     setTotalPrice(total)
@@ -20,7 +23,13 @@ export const ShoppingCart = () => {
     const productsDB = await db.cart.toArray()
     setProductsCart(productsDB)
 
-  })
+  }, [])
+
+  useEffect(() => {
+    if (productsCart.length > 0) {
+      getTotalPrice()
+    }
+  }, [productsCart])
 
   return (
     <>
@@ -30,7 +39,11 @@ export const ShoppingCart = () => {
           <NavDropdown title="Carrito" id="basic-nav-dropdown">
             {productsCart?.map((product) => <ShoppingCartItem key={product.id} item={product} />)}
             <NavDropdown.Divider />
-          <NavDropdown.Item>Total: ${getTotalPrice}</NavDropdown.Item>
+            <NavDropdown.Item>
+              <Link to={"/purchase"} className="link_prod">
+                Total: ${totalPrice}
+              </Link>
+              </NavDropdown.Item>
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>

@@ -1,17 +1,23 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container} from 'react-bootstrap';
-import { Headerapp } from './components/Headerapp';
-import { ListProducts } from './components/Products/ListProducts';
+import {Home} from '../src/views/Home';
+import {Navigate, Route, Routes} from 'react-router-dom';
+import { ProductsView } from './views/ProductsView';
+import {PurchaseView} from './views/PurchaseView';
+
+
 
 function App() {
   return (
-    <Container>
-      <div className="App">
-        <Headerapp />
-        <ListProducts />
-      </div>
-    </Container>
+    <Routes>
+       <Route path="/"  element={<Home />} />
+       <Route path="/product/:id" element={<ProductsView/>} />
+       <Route path="/purchase" element={<PurchaseView />} />
+       <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
+     
+    
+    
   );
 }
 
